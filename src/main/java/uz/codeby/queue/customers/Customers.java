@@ -10,6 +10,7 @@ import org.hibernate.annotations.SourceType;
 import org.hibernate.annotations.UpdateTimestamp;
 import uz.codeby.queue.utils.TableName;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Builder
