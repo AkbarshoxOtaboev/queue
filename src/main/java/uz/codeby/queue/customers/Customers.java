@@ -25,6 +25,8 @@ public class Customers {
     private Long id;
     private String name;
     private Integer ticket;
+    private Integer logStatus;
+    private Integer status;
     @CreationTimestamp(source = SourceType.DB)
     private Date createdAt;
     @UpdateTimestamp(source = SourceType.DB)

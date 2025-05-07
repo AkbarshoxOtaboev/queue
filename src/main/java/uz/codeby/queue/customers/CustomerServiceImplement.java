@@ -1,11 +1,10 @@
 package uz.codeby.queue.customers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import uz.codeby.queue.tickets.TicketService;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -22,17 +21,24 @@ public class CustomerServiceImplement implements CustomerService {
 
     @Override
     public List<Customers> findAll() {
-        return customerRepository.findAll();
+        return customerRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
     }
 
 
     @Override
     public Customers save(String name) {
         Customers customers = new Customers();
+        customers.setStatus(1);
+        customers.setLogStatus(0);
         customers.setName(name);
         customers.setTicket(ticketService.addTicket());
         customerRepository.save(customers);
         return customers;
+    }
+
+    @Override
+    public Customers findById(Long id) {
+        return customerRepository.findById(id).orElse(null);
     }
 
 

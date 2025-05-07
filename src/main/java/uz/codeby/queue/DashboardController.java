@@ -35,6 +35,13 @@ public class DashboardController {
         model.addAttribute("title", "Dashboard");
         return "dashboard";
     }
+    @GetMapping("/dashboard/users")
+    public String users(Model model) {
+        var user = userService.getCurrentUser();
+        model.addAttribute("user", user);
+        model.addAttribute("title", "Users");
+        return "users";
+    }
 
     @PostMapping("/create/queue")
     public ResponseEntity<Customers> createQueue(@RequestParam("name")String name) {

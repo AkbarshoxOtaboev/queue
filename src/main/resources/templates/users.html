@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/image/urspi_new.png">
-    <title>International</title>
+    <title th:text="${user}"></title>
     <!-- Custom CSS -->
     <link href="/css/admin.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -52,7 +52,7 @@
                                 <li class="breadcrumb-item">
                                     <a href="/dashboard">Dashboard</a>
                                 </li>
-                                <li class="breadcrumb-item active" aria-current="page">Queue</li>
+                                <li class="breadcrumb-item active" aria-current="page">Users</li>
                             </ol>
                         </nav>
                     </div>
@@ -60,49 +60,33 @@
             </div>
         </div>
         <div class="container-fluid">
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-outline-purple"><i class="ti-plus"></i> Add user</button>
+            </div>
 
-            <div class="row">
+            <div class="row mt-3">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                          <table class="table table-bordered table-hover">
-                              <thead>
-                              <tr>
-                                  <th>ID</th>
-                                  <th>Customer</th>
-                                  <th>Queue number</th>
-                                  <th>Log status</th>
-                                  <th>Status</th>
-                                  <th>Actions</th>
-                              </tr>
-                              </thead>
-                              <tbody th:each="customer, itertStat: ${customers}">
-                              <tr>
-                                  <td th:text="${itertStat.index+1}"></td>
-                                  <td th:text="${customer.name}"></td>
-                                  <td th:text="${customer.ticket}"></td>
-                                  <td>
-                                      <select class="form-control"
-
-                                              th:attr="data-id=${customer.id}"
-                                              onchange="updateLogStatus(this)">
-                                          <option th:value="0" th:selected="${customer.logStatus == 0}">Waiting</option>
-                                          <option th:value="1" th:selected="${customer.logStatus == 1}">Being served</option>
-                                          <option th:value="2" th:selected="${customer.logStatus == 2}">Served</option>
-                                      </select>
-                                  </td>
-                                  <td th:text="${customer.status}"></td>
-                              </tr>
-                              </tbody>
-                          </table>
+                            <table class="table table-bordered table-hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>User</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
         <div th:insert="~{parts/footer::footer}"></div>
     </div>
-
 </div>
 <script src="/js/jquery.min.js"></script>
 <!-- Bootstrap tether Core JavaScript -->
@@ -121,36 +105,6 @@
 <script src="/js/sidebarmenu.js"></script>
 <!--Custom JavaScript -->
 <script src="/js/custom.min.js"></script>
-<script>
-    function updateLogStatus(selectElement) {
-        const customerId = selectElement.getAttribute("data-id");
-        const newStatus = selectElement.value;
-
-
-        fetch(`/dashboard/customers/${customerId}/update-log-status`, {
-            method: 'POST',
-            headers: {
-                 'Content-Type': 'application/json',
-                 // 'X-CSRF-TOKEN': document.querySelector('meta[name="_csrf"]').content // If CSRF is enabled
-            },
-            body: JSON.stringify({ logStatus: newStatus })
-
-        })
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                }
-                throw new Error("Update failed");
-            })
-            .then(data => {
-                // Optionally update UI or display notification
-                console.log("Log status updated successfully");
-            })
-            .catch(error => {
-                console.error("Error:", error);
-            });
-    }
-</script>
 </body>
 
 </html>

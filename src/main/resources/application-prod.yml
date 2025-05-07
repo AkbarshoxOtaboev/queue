@@ -5,9 +5,9 @@ spring:
     basename: messages
   datasource:
 #    you must to changed localhost on server ip
-    url: jdbc:postgresql://localhost:5432/queue
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://89.169.2.113:5432/queue
+    username: queue
+    password: queue1
     driver-class-name: org.postgresql.Driver
   thymeleaf:
     encoding: UTF-8
