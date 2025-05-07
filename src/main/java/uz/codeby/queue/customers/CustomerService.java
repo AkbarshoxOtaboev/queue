@@ -7,4 +7,6 @@ public interface CustomerService {
     List<Customers> findAll();
     Customers save(String name);
     Customers findById(Long id);
+    void deleteById(Long id, Integer status);
+    CustomerStatusDTO getCustomerStatus();
 }

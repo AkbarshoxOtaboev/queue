@@ -33,4 +33,10 @@ public class CustomerController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/queue/delete")
+    public String delete(@RequestParam("id") Long id, @RequestParam("status") Integer status) {
+        customerService.deleteById(id, status);
+        return "redirect:/dashboard/queue";
+    }
+
 }

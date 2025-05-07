@@ -33,6 +33,7 @@ public class DashboardController {
         var user = userService.getCurrentUser();
         model.addAttribute("user", user);
         model.addAttribute("title", "Dashboard");
+        model.addAttribute("result", customerService.getCustomerStatus());
         return "dashboard";
     }
     @GetMapping("/dashboard/users")

@@ -41,5 +41,22 @@ public class CustomerServiceImplement implements CustomerService {
         return customerRepository.findById(id).orElse(null);
     }
 
+    @Override
+    public void deleteById(Long id, Integer status) {
+        Customers customers = findById(id);
+        customers.setStatus(status.equals(1) ? 0 : 1);
+        customers.setLogStatus(status.equals(1) ? 3 : 0);
+        customerRepository.save(customers);
+    }
 
+    @Override
+    public CustomerStatusDTO getCustomerStatus() {
+        Object[] result = customerRepository.countsStudentStatusRaw().get(0);
+        return new CustomerStatusDTO(
+                ((Number) result[0]).intValue(),
+                ((Number) result[1]).intValue(),
+                ((Number) result[2]).intValue(),
+                ((Number) result[3]).intValue()
+        );
+    }
 }

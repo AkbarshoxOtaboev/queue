@@ -94,9 +94,8 @@
                                     <span class="text-orange display-6"><i class="ti-id-badge"></i></span>
                                 </div>
                                 <div class="ml-auto text-orange font-weight-bold">
-<!--                                    <h2 th:text="${counts.statusOne}"></h2>-->
-                                    <h2>10</h2>
-                                    <h6>New queue</h6>
+                                    <h2 th:text="${result.waiting}"></h2>
+                                    <h6>Waiting</h6>
                                 </div>
                             </div>
                         </div>
@@ -110,9 +109,8 @@
                                     <span class="text-dark display-6"><i class="ti-bookmark-alt"></i></span>
                                 </div>
                                 <div class="ml-auto text-dark font-weight-bold">
-<!--                                    <h2 th:text="${counts.statusTwo}"></h2>-->
-                                    <h2>2</h2>
-                                    <h6 >In process</h6>
+                                    <h2 th:text="${result.beingServed}"></h2>
+                                    <h6>Being served</h6>
                                 </div>
                             </div>
                         </div>
@@ -126,9 +124,8 @@
                                     <span class="text-success display-6"><i class="ti-save-alt"></i></span>
                                 </div>
                                 <div class="ml-auto text-success font-weight-bold">
-<!--                                    <h2 th:text="${counts.statusThree}"></h2>-->
-                                    <h2>7</h2>
-                                    <h6>Accepted</h6>
+                                    <h2 th:text="${result.served}"></h2>
+                                    <h6>Served</h6>
                                 </div>
                             </div>
                         </div>
@@ -142,9 +139,8 @@
                                     <span class="text-danger display-6"><i class="ti-na"></i></span>
                                 </div>
                                 <div class="ml-auto text-danger font-weight-bold">
-<!--                                    <h2 th:text="${counts.statusFour}"></h2>-->
-                                    <h2>4</h2>
-                                    <h6 >Rejected</h6>
+                                    <h2 th:text="${result.rejected}"></h2>
+                                    <h6>Rejected</h6>
                                 </div>
                             </div>
                         </div>

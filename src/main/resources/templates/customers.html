@@ -72,7 +72,6 @@
                                   <th>Customer</th>
                                   <th>Queue number</th>
                                   <th>Log status</th>
-                                  <th>Status</th>
                                   <th>Actions</th>
                               </tr>
                               </thead>
@@ -89,9 +88,27 @@
                                           <option th:value="0" th:selected="${customer.logStatus == 0}">Waiting</option>
                                           <option th:value="1" th:selected="${customer.logStatus == 1}">Being served</option>
                                           <option th:value="2" th:selected="${customer.logStatus == 2}">Served</option>
+                                          <option hidden th:value="3" th:selected="${customer.logStatus == 3}">Rejected</option>
                                       </select>
                                   </td>
-                                  <td th:text="${customer.status}"></td>
+                                  <td th:if="${customer.status == 1}">
+                                      <button disabled type="button" class="btn btn-primary btn-sm">Active</button>
+                                  </td>
+                                  <th th:unless="${customer.status == 1}">
+                                      <button disabled class="btn btn-danger btn-sm">Deleted</button>
+                                  </th>
+                                  <td th:if="${customer.status == 1}">
+                                      <a th:href="@{/dashboard/queue/delete(id= ${customer.id}, status = ${customer.status})}"
+                                         class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete this queue?')">
+                                          <i class="ti-trash"></i>
+                                      </a>
+                                  </td>
+                                  <td th:unless="${customer.status == 1}">
+                                      <a th:href="@{/dashboard/queue/delete(id= ${customer.id}, status = ${customer.status})}"
+                                         class="btn btn-outline-success" onclick="return confirm('Are you sure you want to active this queue?')">
+                                          <i class="ti-back-left"></i>
+                                      </a>
+                                  </td>
                               </tr>
                               </tbody>
                           </table>
